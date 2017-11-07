@@ -5,6 +5,7 @@ import { About } from '../Components/About';
 import { Contact } from '../Components/Contact';
 import { Admin } from '../Components/Admin';
 import { SignIn } from '../Components/SignIn';
+import { NewPost } from '../Components/NewPost';
 
 export default () => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ export default () => (
       <Route path="/contact" exact component={Contact}/>
       <Route path="/admin" exact component={Admin}/>
       <Route path="/sign-in" exact component={SignIn}/>
+      <Route path="/new-post" exact component={NewPost}/>
     </Switch>
   </BrowserRouter>
 );
