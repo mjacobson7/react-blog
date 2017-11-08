@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navigation } from './Navigation';
 import { Header } from './Header'; 
+import { AdminSideNav } from './AdminSideNav'
 
 export class NewPost extends Component {
     render() {
@@ -9,6 +10,7 @@ export class NewPost extends Component {
                 <Navigation />
                 <Header/>
                 <div>New Post Page</div>
+                <AdminSideNav/>
             </div>
         )
     }

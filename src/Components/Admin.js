@@ -27,8 +27,8 @@ export class Admin extends Component {
           Name of Blog:
           <input value={this.state.blogName} onChange={(event) => this.onHandleChange(event)}/>
         </label> */}
-        <div class="container-fluid">
-          <div class="row">
+        <div className="container-fluid">
+          <div className="row">
             <AdminSideNav />
             <BlogEntries />
           </div>
