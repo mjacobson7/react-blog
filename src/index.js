@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Routes from './Components/Routes';
-import './index.css';
-import './App.css';
+import './css/App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './clean-blog.min.css';
-import registerServiceWorker from './registerServiceWorker';
+import './css/clean-blog.min.css';
 
 class App extends Component {
     
@@ -19,4 +17,3 @@ class App extends Component {
     }
 
 ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
