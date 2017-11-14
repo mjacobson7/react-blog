@@ -11,8 +11,8 @@ import { GlobalSettings } from '../Components/GlobalSettings';
 export default () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/sign-in" exact component={SignIn}/>
       <Route path="/" exact component={Home}/>
+      <Route path="/sign-in" exact component={SignIn}/>
       <Route path="/about" exact component={About}/>
       <Route path="/contact" exact component={Contact}/>
       <Route path="/admin" exact component={Admin}/>
