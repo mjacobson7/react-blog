@@ -15,5 +15,5 @@ app.get('*', function(request, response) {
 
 
   app.listen(process.env.PORT || port, () => {
-    console.log(`Listening on port ${port}`);
+    console.log(`Now listening on port ${port}`);
   });
