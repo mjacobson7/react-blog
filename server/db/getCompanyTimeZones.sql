@@ -1,1 +1,0 @@
-SELECT time_zone FROM company_selected_timezone where company_id = 12345; 
