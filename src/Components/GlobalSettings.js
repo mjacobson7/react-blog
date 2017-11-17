@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Header } from './Header';
 import { Navigation } from './Navigation';
 import { AdminSideNav } from './AdminSideNav'; 
+import { Footer } from './Footer';
 
 export class GlobalSettings extends Component {
     render() {
@@ -10,6 +11,7 @@ export class GlobalSettings extends Component {
                 <Navigation />
                 <Header />
                 <AdminSideNav />
+                <Footer />
             </div>
         )
     }

@@ -4,20 +4,31 @@ const port = process.env.PORT || 2400;
 const http = require('http');    
 const cors = require('cors');
 const massive = require("massive");
-const products_controller = require('./products_controller');
+const controller = require('./controller');
+const secrets = require('./secrets.js');
 require('dotenv').config();
 
+//middleware
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-massive( process.env.CONNECTION_STRING ).then( dbInstance => app.set('db', dbInstance) );
+
+//db config
+massive({
+    host: 'localhost',
+    port: secrets.port,
+    database: secrets.database,
+    user: secrets.user,
+    password: secrets.password,
+    ssl: false
+  }).then(db => {
+    app.set('db', db);
+  });
 
 //routes
-app.post( '/api/product', products_controller.create );
-app.get( '/api/products', products_controller.getAll );
-app.get( '/api/product/:id', products_controller.getOne );
-app.put( '/api/product/:id', products_controller.update );
-app.delete( '/api/product/:id', products_controller.delete );
+app.get('/api/injuries', controller.getAll);
+
+
 
 
 //Set up static files

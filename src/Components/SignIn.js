@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Footer } from './Footer';
+import axios from 'axios';
+
+axios.get('/api/injuries').then((response) => { console.log(response)});
 
 export class SignIn extends Component {
+
   render() {
     return (
       <div className="App">
