@@ -17,7 +17,7 @@
 .env.production.local
 
 # server
-server/secrets.js
+server/api/config/secrets.js
 server/.env
 
 npm-debug.log*

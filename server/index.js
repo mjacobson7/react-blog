@@ -1,35 +1,50 @@
-const bodyParser = require('body-parser');
-const express = require('express');
-const port = process.env.PORT || 2400;
-const http = require('http');    
-const cors = require('cors');
-const massive = require("massive");
-const controller = require('./controller');
-const secrets = require('./secrets.js');
-require('dotenv').config();
+var User = require('./api/models/user').User;
+var BlogPost = require('./api/models/blogPost');
+var GlobalSetting = require('./api/models/globalSetting');
+var session = require('express-session');
+var express = require('express');
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var port = 9000;
 
-//middleware
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
-
-//db config
-massive({
-    host: 'localhost',
-    port: secrets.port,
-    database: secrets.database,
-    user: secrets.user,
-    password: secrets.password,
-    ssl: false
-  }).then(db => {
-    app.set('db', db);
-  });
+var app = express();
+// app.set('port', 9000);
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.listen(app.get('port'), () => console.log(`App started on port ${app.get('port')}`));
+    
+app.use(session({
+    key: 'user_sid',
+    secret: 'somerandonstuffs',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+    expires: 600000
+    }
+}));
+        
+// This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
+// This usually happens when you stop your express server after login, your cookie still remains saved in the browser.
+app.use((req, res, next) => {
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid');        
+    }
+    next();
+});
+        
+// middleware function to check for logged-in users
+var sessionChecker = (req, res, next) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.redirect('/dashboard');
+    } else {
+        next();
+    }    
+};
 
 //routes
-app.get('/api/injuries', controller.getAll);
-
-
-
+require('./api/auth/authRoutes')(app, sessionChecker, User);
 
 //Set up static files
 app.use(express.static('build'));
