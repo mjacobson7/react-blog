@@ -12,6 +12,10 @@ export class SignIn extends Component {
     }
   }
 
+  handleClick(event) {
+    
+  }
+
   render() {
     return (
       <div className="App">
