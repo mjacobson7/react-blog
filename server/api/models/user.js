@@ -23,13 +23,12 @@ var sequelize = require('../config/database').database;
             const salt = bcrypt.genSaltSync();
             user.password = bcrypt.hashSync(user.password, salt);
           }
-        },
-        instanceMethods: {
-          validPassword: function(password) {
-            return bcrypt.compareSync(password, this.password);
-          }
-        }    
+        } 
     });
+
+    User.prototype.validPassword = function(password) {
+        return bcrypt.compareSync(password, this.password);
+    }
     
     sequelize.sync()
         .then(() => console.log('users table has been successfully created, if one doesn\'t exist'))

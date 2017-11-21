@@ -8,13 +8,15 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var port = 9000;
 
+//Express
 var app = express();
-// app.set('port', 9000);
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.listen(app.get('port'), () => console.log(`App started on port ${app.get('port')}`));
     
+//Sessions
 app.use(session({
     key: 'user_sid',
     secret: 'somerandonstuffs',
@@ -37,7 +39,8 @@ app.use((req, res, next) => {
 // middleware function to check for logged-in users
 var sessionChecker = (req, res, next) => {
     if (req.session.user && req.cookies.user_sid) {
-        res.redirect('/dashboard');
+        // res.redirect('/dashboard');
+        console.log("already logged in");
     } else {
         next();
     }    
